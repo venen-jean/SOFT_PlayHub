@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b30c31e9d39d43fa876a6fd76357c178" Name="Diagram1">
+        <EntityTypeShape EntityType="g4_6it23Model.admin_logs" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.game_categories" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.game_games_categories" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.game_games_platforms" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.game_platforms" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_permissions" Width="1.5" PointX="3.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles_inherits" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles_permissions" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_users_roles" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_developers_games" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_games" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_publishers_games" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_reviews" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_studios" Width="1.5" PointX="3" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_users" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_users_games" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_wishlists" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="g4_6it23Model.FK__game_game__categ__1DDB52D8" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__game_game__game___1CE72E9F" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__game_game__game___22A007F5" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__game_game__platf__23942C2E" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_rol__permi__32D66FBE" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_rol__child__2F05DEDA" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_rol__paren__2E11BAA1" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_rol__role___31E24B85" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_use__role___2B354DF6" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__hrbac_use__user___2A4129BD" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_de__game___172E5549" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_de__studi__18227982" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_de__user___163A3110" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_pu__game___1269A02C" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_re__game___041B80D5" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_us__game___07EC11B9" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_wi__game___0BBCA29D" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_pu__studi__135DC465" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_pu__user___11757BF3" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_re__user___03275C9C" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_st__user___0E990F48" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_us__user___06F7ED80" ManuallyRouted="false" />
+        <AssociationConnector Association="g4_6it23Model.FK__public_wi__user___0AC87E64" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="g4_6it23Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_datetime" Type="datetime" Nullable="false" />
+          <Property Name="action" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="table_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="user_agent" Type="nvarchar" MaxLength="255" />
+          <Property Name="old_data" Type="nvarchar(max)" />
+          <Property Name="new_data" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="game_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="game_games_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="game_games_platforms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="platform_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="game_platforms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hrbac_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="hrbac_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hrbac_roles_inherits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent_role_id" Type="int" Nullable="false" />
+          <Property Name="child_role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hrbac_roles_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="permission_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hrbac_users_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="public_developers_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="studio_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="public_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="thumbnail_path" Type="nvarchar" MaxLength="255" />
+          <Property Name="price" Type="float" />
+          <Property Name="publish_datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="public_publishers_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="studio_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="public_reviews">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="review_datetime" Type="datetime" />
+          <Property Name="stars" Type="int" />
+          <Property Name="content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="public_studios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="public_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="balance" Type="float" />
+        </EntityType>
+        <EntityType Name="public_users_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="buy_datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="public_wishlists">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="added_datetime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__game_game__categ__1DDB52D8">
+          <End Role="game_categories" Type="Self.game_categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_categories" Type="Self.game_games_categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_categories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__game___1CE72E9F">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_categories" Type="Self.game_games_categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_categories">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__game___22A007F5">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_platforms" Type="Self.game_games_platforms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_platforms">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__platf__23942C2E">
+          <End Role="game_platforms" Type="Self.game_platforms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_platforms" Type="Self.game_games_platforms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_platforms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_platforms">
+              <PropertyRef Name="platform_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__child__2F05DEDA">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1" />
+          <End Role="hrbac_roles_inherits" Type="Self.hrbac_roles_inherits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_inherits">
+              <PropertyRef Name="child_role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__paren__2E11BAA1">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_inherits" Type="Self.hrbac_roles_inherits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_inherits">
+              <PropertyRef Name="parent_role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__permi__32D66FBE">
+          <End Role="hrbac_permissions" Type="Self.hrbac_permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_permissions" Type="Self.hrbac_roles_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__role___31E24B85">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_permissions" Type="Self.hrbac_roles_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_permissions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_use__role___2B354DF6">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_users_roles" Type="Self.hrbac_users_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_users_roles">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_use__user___2A4129BD">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_users_roles" Type="Self.hrbac_users_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_users_roles">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__game___172E5549">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__studi__18227982">
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="1" />
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_studios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="studio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__user___163A3110">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__game___1269A02C">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__studi__135DC465">
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="1" />
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_studios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="studio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__user___11757BF3">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_re__game___041B80D5">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_reviews" Type="Self.public_reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_reviews">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_re__user___03275C9C">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_reviews" Type="Self.public_reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_reviews">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_st__user___0E990F48">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="0..1" />
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_studios">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_us__game___07EC11B9">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_users_games" Type="Self.public_users_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_users_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_us__user___06F7ED80">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_users_games" Type="Self.public_users_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_users_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_wi__game___0BBCA29D">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_wishlists" Type="Self.public_wishlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_wishlists">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_wi__user___0AC87E64">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_wishlists" Type="Self.public_wishlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_wishlists">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="g4_6it23ModelStoreContainer">
+          <EntitySet Name="admin_logs" EntityType="Self.admin_logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_categories" EntityType="Self.game_categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_games_categories" EntityType="Self.game_games_categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_games_platforms" EntityType="Self.game_games_platforms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_platforms" EntityType="Self.game_platforms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hrbac_permissions" EntityType="Self.hrbac_permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hrbac_roles" EntityType="Self.hrbac_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hrbac_roles_inherits" EntityType="Self.hrbac_roles_inherits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hrbac_roles_permissions" EntityType="Self.hrbac_roles_permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hrbac_users_roles" EntityType="Self.hrbac_users_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_developers_games" EntityType="Self.public_developers_games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_games" EntityType="Self.public_games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_publishers_games" EntityType="Self.public_publishers_games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_reviews" EntityType="Self.public_reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_studios" EntityType="Self.public_studios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_users" EntityType="Self.public_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_users_games" EntityType="Self.public_users_games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="public_wishlists" EntityType="Self.public_wishlists" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__game_game__categ__1DDB52D8" Association="Self.FK__game_game__categ__1DDB52D8">
+            <End Role="game_categories" EntitySet="game_categories" />
+            <End Role="game_games_categories" EntitySet="game_games_categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__game___1CE72E9F" Association="Self.FK__game_game__game___1CE72E9F">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="game_games_categories" EntitySet="game_games_categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__game___22A007F5" Association="Self.FK__game_game__game___22A007F5">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="game_games_platforms" EntitySet="game_games_platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__platf__23942C2E" Association="Self.FK__game_game__platf__23942C2E">
+            <End Role="game_platforms" EntitySet="game_platforms" />
+            <End Role="game_games_platforms" EntitySet="game_games_platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__child__2F05DEDA" Association="Self.FK__hrbac_rol__child__2F05DEDA">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_inherits" EntitySet="hrbac_roles_inherits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__paren__2E11BAA1" Association="Self.FK__hrbac_rol__paren__2E11BAA1">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_inherits" EntitySet="hrbac_roles_inherits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__permi__32D66FBE" Association="Self.FK__hrbac_rol__permi__32D66FBE">
+            <End Role="hrbac_permissions" EntitySet="hrbac_permissions" />
+            <End Role="hrbac_roles_permissions" EntitySet="hrbac_roles_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__role___31E24B85" Association="Self.FK__hrbac_rol__role___31E24B85">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_permissions" EntitySet="hrbac_roles_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_use__role___2B354DF6" Association="Self.FK__hrbac_use__role___2B354DF6">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_users_roles" EntitySet="hrbac_users_roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_use__user___2A4129BD" Association="Self.FK__hrbac_use__user___2A4129BD">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="hrbac_users_roles" EntitySet="hrbac_users_roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__game___172E5549" Association="Self.FK__public_de__game___172E5549">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__studi__18227982" Association="Self.FK__public_de__studi__18227982">
+            <End Role="public_studios" EntitySet="public_studios" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__user___163A3110" Association="Self.FK__public_de__user___163A3110">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__game___1269A02C" Association="Self.FK__public_pu__game___1269A02C">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__studi__135DC465" Association="Self.FK__public_pu__studi__135DC465">
+            <End Role="public_studios" EntitySet="public_studios" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__user___11757BF3" Association="Self.FK__public_pu__user___11757BF3">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_re__game___041B80D5" Association="Self.FK__public_re__game___041B80D5">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_reviews" EntitySet="public_reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_re__user___03275C9C" Association="Self.FK__public_re__user___03275C9C">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_reviews" EntitySet="public_reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_st__user___0E990F48" Association="Self.FK__public_st__user___0E990F48">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_studios" EntitySet="public_studios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_us__game___07EC11B9" Association="Self.FK__public_us__game___07EC11B9">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_users_games" EntitySet="public_users_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_us__user___06F7ED80" Association="Self.FK__public_us__user___06F7ED80">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_users_games" EntitySet="public_users_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_wi__game___0BBCA29D" Association="Self.FK__public_wi__game___0BBCA29D">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_wishlists" EntitySet="public_wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_wi__user___0AC87E64" Association="Self.FK__public_wi__user___0AC87E64">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_wishlists" EntitySet="public_wishlists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="g4_6it23Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="log_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="action" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="table_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_agent" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="old_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="new_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="game_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="game_games_categories" Relationship="Self.FK__game_game__categ__1DDB52D8" FromRole="game_categories" ToRole="game_games_categories" />
+        </EntityType>
+        <EntityType Name="game_games_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="game_categories" Relationship="Self.FK__game_game__categ__1DDB52D8" FromRole="game_games_categories" ToRole="game_categories" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__game_game__game___1CE72E9F" FromRole="game_games_categories" ToRole="public_games" />
+        </EntityType>
+        <EntityType Name="game_games_platforms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="platform_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__game_game__game___22A007F5" FromRole="game_games_platforms" ToRole="public_games" />
+          <NavigationProperty Name="game_platforms" Relationship="Self.FK__game_game__platf__23942C2E" FromRole="game_games_platforms" ToRole="game_platforms" />
+        </EntityType>
+        <EntityType Name="game_platforms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="game_games_platforms" Relationship="Self.FK__game_game__platf__23942C2E" FromRole="game_platforms" ToRole="game_games_platforms" />
+        </EntityType>
+        <EntityType Name="hrbac_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="hrbac_roles_permissions" Relationship="Self.FK__hrbac_rol__permi__32D66FBE" FromRole="hrbac_permissions" ToRole="hrbac_roles_permissions" />
+        </EntityType>
+        <EntityType Name="hrbac_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="hrbac_roles_inherits" Relationship="Self.FK__hrbac_rol__child__2F05DEDA" FromRole="hrbac_roles" ToRole="hrbac_roles_inherits" />
+          <NavigationProperty Name="hrbac_roles_inherits1" Relationship="Self.FK__hrbac_rol__paren__2E11BAA1" FromRole="hrbac_roles" ToRole="hrbac_roles_inherits" />
+          <NavigationProperty Name="hrbac_roles_permissions" Relationship="Self.FK__hrbac_rol__role___31E24B85" FromRole="hrbac_roles" ToRole="hrbac_roles_permissions" />
+          <NavigationProperty Name="hrbac_users_roles" Relationship="Self.FK__hrbac_use__role___2B354DF6" FromRole="hrbac_roles" ToRole="hrbac_users_roles" />
+        </EntityType>
+        <EntityType Name="hrbac_roles_inherits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent_role_id" Type="Int32" Nullable="false" />
+          <Property Name="child_role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="hrbac_roles" Relationship="Self.FK__hrbac_rol__child__2F05DEDA" FromRole="hrbac_roles_inherits" ToRole="hrbac_roles" />
+          <NavigationProperty Name="hrbac_roles1" Relationship="Self.FK__hrbac_rol__paren__2E11BAA1" FromRole="hrbac_roles_inherits" ToRole="hrbac_roles" />
+        </EntityType>
+        <EntityType Name="hrbac_roles_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="permission_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="hrbac_permissions" Relationship="Self.FK__hrbac_rol__permi__32D66FBE" FromRole="hrbac_roles_permissions" ToRole="hrbac_permissions" />
+          <NavigationProperty Name="hrbac_roles" Relationship="Self.FK__hrbac_rol__role___31E24B85" FromRole="hrbac_roles_permissions" ToRole="hrbac_roles" />
+        </EntityType>
+        <EntityType Name="hrbac_users_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="hrbac_roles" Relationship="Self.FK__hrbac_use__role___2B354DF6" FromRole="hrbac_users_roles" ToRole="hrbac_roles" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__hrbac_use__user___2A4129BD" FromRole="hrbac_users_roles" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_developers_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="studio_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__public_de__game___172E5549" FromRole="public_developers_games" ToRole="public_games" />
+          <NavigationProperty Name="public_studios" Relationship="Self.FK__public_de__studi__18227982" FromRole="public_developers_games" ToRole="public_studios" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_de__user___163A3110" FromRole="public_developers_games" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="thumbnail_path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <Property Name="publish_datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="game_games_categories" Relationship="Self.FK__game_game__game___1CE72E9F" FromRole="public_games" ToRole="game_games_categories" />
+          <NavigationProperty Name="game_games_platforms" Relationship="Self.FK__game_game__game___22A007F5" FromRole="public_games" ToRole="game_games_platforms" />
+          <NavigationProperty Name="public_developers_games" Relationship="Self.FK__public_de__game___172E5549" FromRole="public_games" ToRole="public_developers_games" />
+          <NavigationProperty Name="public_publishers_games" Relationship="Self.FK__public_pu__game___1269A02C" FromRole="public_games" ToRole="public_publishers_games" />
+          <NavigationProperty Name="public_reviews" Relationship="Self.FK__public_re__game___041B80D5" FromRole="public_games" ToRole="public_reviews" />
+          <NavigationProperty Name="public_users_games" Relationship="Self.FK__public_us__game___07EC11B9" FromRole="public_games" ToRole="public_users_games" />
+          <NavigationProperty Name="public_wishlists" Relationship="Self.FK__public_wi__game___0BBCA29D" FromRole="public_games" ToRole="public_wishlists" />
+        </EntityType>
+        <EntityType Name="public_publishers_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="studio_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__public_pu__game___1269A02C" FromRole="public_publishers_games" ToRole="public_games" />
+          <NavigationProperty Name="public_studios" Relationship="Self.FK__public_pu__studi__135DC465" FromRole="public_publishers_games" ToRole="public_studios" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_pu__user___11757BF3" FromRole="public_publishers_games" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_reviews">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="review_datetime" Type="DateTime" Precision="3" />
+          <Property Name="stars" Type="Int32" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__public_re__game___041B80D5" FromRole="public_reviews" ToRole="public_games" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_re__user___03275C9C" FromRole="public_reviews" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_studios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="public_developers_games" Relationship="Self.FK__public_de__studi__18227982" FromRole="public_studios" ToRole="public_developers_games" />
+          <NavigationProperty Name="public_publishers_games" Relationship="Self.FK__public_pu__studi__135DC465" FromRole="public_studios" ToRole="public_publishers_games" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_st__user___0E990F48" FromRole="public_studios" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="balance" Type="Double" />
+          <NavigationProperty Name="hrbac_users_roles" Relationship="Self.FK__hrbac_use__user___2A4129BD" FromRole="public_users" ToRole="hrbac_users_roles" />
+          <NavigationProperty Name="public_developers_games" Relationship="Self.FK__public_de__user___163A3110" FromRole="public_users" ToRole="public_developers_games" />
+          <NavigationProperty Name="public_publishers_games" Relationship="Self.FK__public_pu__user___11757BF3" FromRole="public_users" ToRole="public_publishers_games" />
+          <NavigationProperty Name="public_reviews" Relationship="Self.FK__public_re__user___03275C9C" FromRole="public_users" ToRole="public_reviews" />
+          <NavigationProperty Name="public_studios" Relationship="Self.FK__public_st__user___0E990F48" FromRole="public_users" ToRole="public_studios" />
+          <NavigationProperty Name="public_users_games" Relationship="Self.FK__public_us__user___06F7ED80" FromRole="public_users" ToRole="public_users_games" />
+          <NavigationProperty Name="public_wishlists" Relationship="Self.FK__public_wi__user___0AC87E64" FromRole="public_users" ToRole="public_wishlists" />
+        </EntityType>
+        <EntityType Name="public_users_games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="buy_datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__public_us__game___07EC11B9" FromRole="public_users_games" ToRole="public_games" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_us__user___06F7ED80" FromRole="public_users_games" ToRole="public_users" />
+        </EntityType>
+        <EntityType Name="public_wishlists">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="added_datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="public_games" Relationship="Self.FK__public_wi__game___0BBCA29D" FromRole="public_wishlists" ToRole="public_games" />
+          <NavigationProperty Name="public_users" Relationship="Self.FK__public_wi__user___0AC87E64" FromRole="public_wishlists" ToRole="public_users" />
+        </EntityType>
+        <Association Name="FK__game_game__categ__1DDB52D8">
+          <End Role="game_categories" Type="Self.game_categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_categories" Type="Self.game_games_categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_categories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__game___1CE72E9F">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_categories" Type="Self.game_games_categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_categories">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__game___22A007F5">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_platforms" Type="Self.game_games_platforms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_platforms">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__game_game__platf__23942C2E">
+          <End Role="game_platforms" Type="Self.game_platforms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="game_games_platforms" Type="Self.game_games_platforms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_platforms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_games_platforms">
+              <PropertyRef Name="platform_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__permi__32D66FBE">
+          <End Role="hrbac_permissions" Type="Self.hrbac_permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_permissions" Type="Self.hrbac_roles_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__child__2F05DEDA">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1" />
+          <End Role="hrbac_roles_inherits" Type="Self.hrbac_roles_inherits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_inherits">
+              <PropertyRef Name="child_role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__paren__2E11BAA1">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_inherits" Type="Self.hrbac_roles_inherits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_inherits">
+              <PropertyRef Name="parent_role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_rol__role___31E24B85">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_roles_permissions" Type="Self.hrbac_roles_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_roles_permissions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_use__role___2B354DF6">
+          <End Role="hrbac_roles" Type="Self.hrbac_roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_users_roles" Type="Self.hrbac_users_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hrbac_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_users_roles">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hrbac_use__user___2A4129BD">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="hrbac_users_roles" Type="Self.hrbac_users_roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="hrbac_users_roles">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__game___172E5549">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__studi__18227982">
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="1" />
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_studios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="studio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_de__user___163A3110">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_developers_games" Type="Self.public_developers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_developers_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__game___1269A02C">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_re__game___041B80D5">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_reviews" Type="Self.public_reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_reviews">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_us__game___07EC11B9">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_users_games" Type="Self.public_users_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_users_games">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_wi__game___0BBCA29D">
+          <End Role="public_games" Type="Self.public_games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_wishlists" Type="Self.public_wishlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_wishlists">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__studi__135DC465">
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="1" />
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_studios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="studio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_pu__user___11757BF3">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_publishers_games" Type="Self.public_publishers_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_publishers_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_re__user___03275C9C">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_reviews" Type="Self.public_reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_reviews">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_st__user___0E990F48">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="0..1" />
+          <End Role="public_studios" Type="Self.public_studios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_studios">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_us__user___06F7ED80">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_users_games" Type="Self.public_users_games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_users_games">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__public_wi__user___0AC87E64">
+          <End Role="public_users" Type="Self.public_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="public_wishlists" Type="Self.public_wishlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="public_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="public_wishlists">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="g4_6it23Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin_logs" EntityType="Self.admin_logs" />
+          <EntitySet Name="game_categories" EntityType="Self.game_categories" />
+          <EntitySet Name="game_games_categories" EntityType="Self.game_games_categories" />
+          <EntitySet Name="game_games_platforms" EntityType="Self.game_games_platforms" />
+          <EntitySet Name="game_platforms" EntityType="Self.game_platforms" />
+          <EntitySet Name="hrbac_permissions" EntityType="Self.hrbac_permissions" />
+          <EntitySet Name="hrbac_roles" EntityType="Self.hrbac_roles" />
+          <EntitySet Name="hrbac_roles_inherits" EntityType="Self.hrbac_roles_inherits" />
+          <EntitySet Name="hrbac_roles_permissions" EntityType="Self.hrbac_roles_permissions" />
+          <EntitySet Name="hrbac_users_roles" EntityType="Self.hrbac_users_roles" />
+          <EntitySet Name="public_developers_games" EntityType="Self.public_developers_games" />
+          <EntitySet Name="public_games" EntityType="Self.public_games" />
+          <EntitySet Name="public_publishers_games" EntityType="Self.public_publishers_games" />
+          <EntitySet Name="public_reviews" EntityType="Self.public_reviews" />
+          <EntitySet Name="public_studios" EntityType="Self.public_studios" />
+          <EntitySet Name="public_users" EntityType="Self.public_users" />
+          <EntitySet Name="public_users_games" EntityType="Self.public_users_games" />
+          <EntitySet Name="public_wishlists" EntityType="Self.public_wishlists" />
+          <AssociationSet Name="FK__game_game__categ__1DDB52D8" Association="Self.FK__game_game__categ__1DDB52D8">
+            <End Role="game_categories" EntitySet="game_categories" />
+            <End Role="game_games_categories" EntitySet="game_games_categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__game___1CE72E9F" Association="Self.FK__game_game__game___1CE72E9F">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="game_games_categories" EntitySet="game_games_categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__game___22A007F5" Association="Self.FK__game_game__game___22A007F5">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="game_games_platforms" EntitySet="game_games_platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__game_game__platf__23942C2E" Association="Self.FK__game_game__platf__23942C2E">
+            <End Role="game_platforms" EntitySet="game_platforms" />
+            <End Role="game_games_platforms" EntitySet="game_games_platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__permi__32D66FBE" Association="Self.FK__hrbac_rol__permi__32D66FBE">
+            <End Role="hrbac_permissions" EntitySet="hrbac_permissions" />
+            <End Role="hrbac_roles_permissions" EntitySet="hrbac_roles_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__child__2F05DEDA" Association="Self.FK__hrbac_rol__child__2F05DEDA">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_inherits" EntitySet="hrbac_roles_inherits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__paren__2E11BAA1" Association="Self.FK__hrbac_rol__paren__2E11BAA1">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_inherits" EntitySet="hrbac_roles_inherits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_rol__role___31E24B85" Association="Self.FK__hrbac_rol__role___31E24B85">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_roles_permissions" EntitySet="hrbac_roles_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_use__role___2B354DF6" Association="Self.FK__hrbac_use__role___2B354DF6">
+            <End Role="hrbac_roles" EntitySet="hrbac_roles" />
+            <End Role="hrbac_users_roles" EntitySet="hrbac_users_roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hrbac_use__user___2A4129BD" Association="Self.FK__hrbac_use__user___2A4129BD">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="hrbac_users_roles" EntitySet="hrbac_users_roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__game___172E5549" Association="Self.FK__public_de__game___172E5549">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__studi__18227982" Association="Self.FK__public_de__studi__18227982">
+            <End Role="public_studios" EntitySet="public_studios" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_de__user___163A3110" Association="Self.FK__public_de__user___163A3110">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_developers_games" EntitySet="public_developers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__game___1269A02C" Association="Self.FK__public_pu__game___1269A02C">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_re__game___041B80D5" Association="Self.FK__public_re__game___041B80D5">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_reviews" EntitySet="public_reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_us__game___07EC11B9" Association="Self.FK__public_us__game___07EC11B9">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_users_games" EntitySet="public_users_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_wi__game___0BBCA29D" Association="Self.FK__public_wi__game___0BBCA29D">
+            <End Role="public_games" EntitySet="public_games" />
+            <End Role="public_wishlists" EntitySet="public_wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__studi__135DC465" Association="Self.FK__public_pu__studi__135DC465">
+            <End Role="public_studios" EntitySet="public_studios" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_pu__user___11757BF3" Association="Self.FK__public_pu__user___11757BF3">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_publishers_games" EntitySet="public_publishers_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_re__user___03275C9C" Association="Self.FK__public_re__user___03275C9C">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_reviews" EntitySet="public_reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_st__user___0E990F48" Association="Self.FK__public_st__user___0E990F48">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_studios" EntitySet="public_studios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_us__user___06F7ED80" Association="Self.FK__public_us__user___06F7ED80">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_users_games" EntitySet="public_users_games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__public_wi__user___0AC87E64" Association="Self.FK__public_wi__user___0AC87E64">
+            <End Role="public_users" EntitySet="public_users" />
+            <End Role="public_wishlists" EntitySet="public_wishlists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="g4_6it23ModelStoreContainer" CdmEntityContainer="g4_6it23Entities">
+          <EntitySetMapping Name="admin_logs">
+            <EntityTypeMapping TypeName="g4_6it23Model.admin_logs">
+              <MappingFragment StoreEntitySet="admin_logs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="log_datetime" ColumnName="log_datetime" />
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="user_agent" ColumnName="user_agent" />
+                <ScalarProperty Name="old_data" ColumnName="old_data" />
+                <ScalarProperty Name="new_data" ColumnName="new_data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_categories">
+            <EntityTypeMapping TypeName="g4_6it23Model.game_categories">
+              <MappingFragment StoreEntitySet="game_categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_games_categories">
+            <EntityTypeMapping TypeName="g4_6it23Model.game_games_categories">
+              <MappingFragment StoreEntitySet="game_games_categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_games_platforms">
+            <EntityTypeMapping TypeName="g4_6it23Model.game_games_platforms">
+              <MappingFragment StoreEntitySet="game_games_platforms">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="platform_id" ColumnName="platform_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_platforms">
+            <EntityTypeMapping TypeName="g4_6it23Model.game_platforms">
+              <MappingFragment StoreEntitySet="game_platforms">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hrbac_permissions">
+            <EntityTypeMapping TypeName="g4_6it23Model.hrbac_permissions">
+              <MappingFragment StoreEntitySet="hrbac_permissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hrbac_roles">
+            <EntityTypeMapping TypeName="g4_6it23Model.hrbac_roles">
+              <MappingFragment StoreEntitySet="hrbac_roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hrbac_roles_inherits">
+            <EntityTypeMapping TypeName="g4_6it23Model.hrbac_roles_inherits">
+              <MappingFragment StoreEntitySet="hrbac_roles_inherits">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="parent_role_id" ColumnName="parent_role_id" />
+                <ScalarProperty Name="child_role_id" ColumnName="child_role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hrbac_roles_permissions">
+            <EntityTypeMapping TypeName="g4_6it23Model.hrbac_roles_permissions">
+              <MappingFragment StoreEntitySet="hrbac_roles_permissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="permission_id" ColumnName="permission_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hrbac_users_roles">
+            <EntityTypeMapping TypeName="g4_6it23Model.hrbac_users_roles">
+              <MappingFragment StoreEntitySet="hrbac_users_roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_developers_games">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_developers_games">
+              <MappingFragment StoreEntitySet="public_developers_games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="studio_id" ColumnName="studio_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_games">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_games">
+              <MappingFragment StoreEntitySet="public_games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail_path" ColumnName="thumbnail_path" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="publish_datetime" ColumnName="publish_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_publishers_games">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_publishers_games">
+              <MappingFragment StoreEntitySet="public_publishers_games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="studio_id" ColumnName="studio_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_reviews">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_reviews">
+              <MappingFragment StoreEntitySet="public_reviews">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="review_datetime" ColumnName="review_datetime" />
+                <ScalarProperty Name="stars" ColumnName="stars" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_studios">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_studios">
+              <MappingFragment StoreEntitySet="public_studios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_users">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_users">
+              <MappingFragment StoreEntitySet="public_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_users_games">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_users_games">
+              <MappingFragment StoreEntitySet="public_users_games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="buy_datetime" ColumnName="buy_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="public_wishlists">
+            <EntityTypeMapping TypeName="g4_6it23Model.public_wishlists">
+              <MappingFragment StoreEntitySet="public_wishlists">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="added_datetime" ColumnName="added_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
