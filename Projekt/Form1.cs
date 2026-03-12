@@ -75,11 +75,6 @@ namespace Projekt
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             var users = Daten.public_users.FirstOrDefault(u => u.username == textBox1.Text);
@@ -114,7 +109,7 @@ namespace Projekt
             }
             else
             {
-                MessageBox.Show("Bitte Füll alle Felder aus!");
+                MessageBox.Show("Bitte füll alle Felder aus!");
             }
                 mode = true;
             anzeigeclear();
@@ -155,7 +150,7 @@ namespace Projekt
             }
             else
             {
-                MessageBox.Show("Bitte Füll alle Felder aus!");
+                MessageBox.Show("Bitte füll alle Felder aus!");
             }
 
             mode = false;
