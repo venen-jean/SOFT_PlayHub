@@ -81,16 +81,15 @@ namespace Projekt
                 if (textBox1.Text.Contains("@")&& textBox1.Text.Contains("."))
                 {
                     string passwordHash = Passwordhasher.HashPassword(textBox2.Text);
+
                     var user = Daten.public_users
-                .FirstOrDefault(u => u.email == textBox1.Text
+                .FirstOrDefault(u => u.email.ToLower() == textBox1.Text.ToLower()
                                   && u.password == passwordHash);
+                    
 
                     if (user!=null)
                     {
                         MessageBox.Show("Login ja!");
-                        Console.WriteLine(user.email);
-                        Console.WriteLine(user.password);
-                        Console.WriteLine(passwordHash);
                     }
                     else
                     {
