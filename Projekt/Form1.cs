@@ -8,6 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Projekt
 {
@@ -24,6 +25,15 @@ namespace Projekt
             button3.Text = "Beenden";
         }
 
+
+        private void anzeigeclear()
+        {
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+        }
         private void anzeige(int nu)
         {
             switch (nu)
@@ -52,6 +62,7 @@ namespace Projekt
                     label2.Visible = true;
                     label3.Visible = true;
                     label4.Visible = true;
+                    textBox2.PasswordChar = '\0';
                     textBox3.PasswordChar = '*';
                     textBox4.PasswordChar = '*';
                     textBox1.Visible = true;
@@ -106,6 +117,7 @@ namespace Projekt
                 MessageBox.Show("Bitte Füll alle Felder aus!");
             }
                 mode = true;
+            anzeigeclear();
 
         }
 
@@ -119,9 +131,22 @@ namespace Projekt
                 ||!string.IsNullOrEmpty(textBox4.Text)
                     )
             {
-                if (textBox1.Text.Contains("@"))
+                if (textBox2.Text.Contains("@"))
                 {
-                    MessageBox.Show("Register!");
+
+                    if (textBox3.Text.Equals(textBox4.Text))
+                    {
+                        var newone = new public_users();
+                        newone.username = textBox1.Text;
+                        newone.email = textBox2.Text;
+                        newone.password = Passwordhasher.HashPassword(textBox3.Text);
+                        newone.balance = 100;
+                        MessageBox.Show("Register!");
+                        Daten.public_users.Add(newone);
+                        Daten.SaveChanges();
+
+                    }
+
                 }
                 else
                 {
@@ -134,11 +159,11 @@ namespace Projekt
             }
 
             mode = false;
+            anzeigeclear();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Application.Exit();
         }
     }
 }
