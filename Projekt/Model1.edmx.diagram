@@ -11,16 +11,16 @@
         <EntityTypeShape EntityType="g4_6it23Model.game_games_platforms" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.game_platforms" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.hrbac_permissions" Width="1.5" PointX="3.75" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles" Width="1.5" PointX="13.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles_inherits" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.hrbac_roles_permissions" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="g4_6it23Model.hrbac_users_roles" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.hrbac_users_roles" Width="1.5" PointX="9.625" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_developers_games" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_games" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_publishers_games" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_reviews" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_studios" Width="1.5" PointX="3" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="g4_6it23Model.public_users" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="g4_6it23Model.public_users" Width="1.5" PointX="11.625" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_users_games" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="g4_6it23Model.public_wishlists" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="g4_6it23Model.FK__game_game__categ__1DDB52D8" ManuallyRouted="false" />
