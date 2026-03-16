@@ -10,16 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Projekt
-{
-
-    
+{   
     public partial class main : Form
     {
-
-        private int userid;
         public main()
         {
             InitializeComponent();
+
+            public_users_gamesBindingSource.DataSource = globalstore.Daten.public_users_games.ToList();
 
             label1.Text = ("Willkommen: "+globalstore.user.username);
 
@@ -30,14 +28,19 @@ namespace Projekt
                          select r.name)
                          .ToList();
 
-
             label1.Text += " " +roles;
 
+            
 
         }
 
         private void main_Load(object sender, EventArgs e)
         {
+        }
+
+        private void idLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

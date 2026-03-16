@@ -167,6 +167,24 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\admin_logs.datasource" />
+    <None Include="Properties\DataSources\game_categories.datasource" />
+    <None Include="Properties\DataSources\game_games_categories.datasource" />
+    <None Include="Properties\DataSources\game_games_platforms.datasource" />
+    <None Include="Properties\DataSources\game_platforms.datasource" />
+    <None Include="Properties\DataSources\hrbac_permissions.datasource" />
+    <None Include="Properties\DataSources\hrbac_roles.datasource" />
+    <None Include="Properties\DataSources\hrbac_roles_inherits.datasource" />
+    <None Include="Properties\DataSources\hrbac_roles_permissions.datasource" />
+    <None Include="Properties\DataSources\hrbac_users_roles.datasource" />
+    <None Include="Properties\DataSources\public_developers_games.datasource" />
+    <None Include="Properties\DataSources\public_games.datasource" />
+    <None Include="Properties\DataSources\public_publishers_games.datasource" />
+    <None Include="Properties\DataSources\public_reviews.datasource" />
+    <None Include="Properties\DataSources\public_studios.datasource" />
+    <None Include="Properties\DataSources\public_users.datasource" />
+    <None Include="Properties\DataSources\public_users_games.datasource" />
+    <None Include="Properties\DataSources\public_wishlists.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
