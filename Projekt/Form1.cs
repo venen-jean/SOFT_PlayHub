@@ -14,7 +14,6 @@ namespace Projekt
 {
     public partial class Form1 : Form
     {
-        g4_6it23Entities Daten = new g4_6it23Entities();
         bool mode;
         public Form1()
         {
@@ -82,7 +81,7 @@ namespace Projekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var users = Daten.public_users.FirstOrDefault(u => u.username == textBox1.Text);
+            var users = globalstore.Daten.public_users.FirstOrDefault(u => u.username == textBox1.Text);
 
 
             string tes = textBox1.Text;
@@ -93,14 +92,21 @@ namespace Projekt
                 {
                     string passwordHash = Passwordhasher.HashPassword(textBox2.Text);
 
-                    var user = Daten.public_users
+                    var userdata = globalstore.Daten.public_users
                 .FirstOrDefault(u => u.email.ToLower() == textBox1.Text.ToLower()
                                   && u.password == passwordHash);
-                    
 
-                    if (user!=null)
+                    var user = globalstore.Daten.public_users.FirstOrDefault(a => a.email.ToLower().Equals(textBox1.Text.ToLower()));
+
+                    if (userdata!=null)
                     {
-                        MessageBox.Show("Login ja!");
+
+                        globalstore.user = (public_users)user;
+                        main normal = new main();
+                        normal.Show();
+                        this.Hide();
+                        
+                        //MessageBox.Show("Login ja!");
                     }
                     else
                     {
@@ -142,8 +148,8 @@ namespace Projekt
                         newone.password = Passwordhasher.HashPassword(textBox3.Text);
                         newone.balance = 100;
                         MessageBox.Show("Register!");
-                        Daten.public_users.Add(newone);
-                        Daten.SaveChanges();
+                        globalstore.Daten.public_users.Add(newone);
+                        globalstore.Daten.SaveChanges();
 
                     }
 
