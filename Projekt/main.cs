@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,16 @@ namespace Projekt
             InitializeComponent();
 
             label1.Text = ("Willkommen: "+globalstore.user.username);
+
+            var roles = (from u in globalstore.Daten.public_users
+                         join ur in globalstore.Daten.hrbac_users_roles on u.id equals ur.user_id
+                         join r in globalstore.Daten.hrbac_roles on ur.role_id equals r.id
+                         where u.username == globalstore.user.username
+                         select r.name)
+                         .ToList();
+
+
+            label1.Text += " " +roles;
 
 
         }
