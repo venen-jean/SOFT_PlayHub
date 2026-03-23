@@ -61,6 +61,7 @@
     <Compile Include="admin_logs.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="application\CrudService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="pages\RoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\RoleForm.Designer.cs">
+      <DependentUpon>RoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\RoleEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\RoleEditForm.Designer.cs">
+      <DependentUpon>RoleEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Passwordhasher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +162,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\RoleForm.resx">
+      <DependentUpon>RoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\RoleEditForm.resx">
+      <DependentUpon>RoleEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -185,7 +204,6 @@
     <None Include="Properties\DataSources\public_users.datasource" />
     <None Include="Properties\DataSources\public_users_games.datasource" />
     <None Include="Properties\DataSources\public_wishlists.datasource" />
-    <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
