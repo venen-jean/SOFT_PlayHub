@@ -37,16 +37,21 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.hrbac_users_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // nameLabel
             // 
             nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(45, 144);
+            nameLabel.Location = new System.Drawing.Point(35, 105);
             nameLabel.Name = "nameLabel";
             nameLabel.Size = new System.Drawing.Size(36, 13);
             nameLabel.TabIndex = 3;
@@ -58,7 +63,7 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(87, 141);
+            this.nameTextBox.Location = new System.Drawing.Point(77, 102);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nameTextBox.TabIndex = 9;
@@ -71,7 +76,7 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
             this.hrbac_rolesDataGridView.DataSource = this.hrbac_rolesBindingSource;
-            this.hrbac_rolesDataGridView.Location = new System.Drawing.Point(221, 75);
+            this.hrbac_rolesDataGridView.Location = new System.Drawing.Point(211, 36);
             this.hrbac_rolesDataGridView.Name = "hrbac_rolesDataGridView";
             this.hrbac_rolesDataGridView.Size = new System.Drawing.Size(310, 220);
             this.hrbac_rolesDataGridView.TabIndex = 8;
@@ -91,7 +96,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(48, 183);
+            this.button2.Location = new System.Drawing.Point(38, 144);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -103,22 +108,55 @@
             // 
             this.hrbac_users_rolesBindingSource.DataSource = typeof(Projekt.hrbac_users_roles);
             // 
-            // AdminPanel
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(753, 421);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.hrbac_rolesDataGridView);
+            this.tabPage1.Controls.Add(this.nameTextBox);
+            this.tabPage1.Controls.Add(nameLabel);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(745, 395);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Roles";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(745, 395);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // RoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 379);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.hrbac_rolesDataGridView);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(nameLabel);
-            this.Name = "AdminPanel";
+            this.ClientSize = new System.Drawing.Size(784, 453);
+            this.Controls.Add(this.tabControl1);
+            this.Name = "RoleForm";
             this.Text = "s";
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -131,5 +169,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

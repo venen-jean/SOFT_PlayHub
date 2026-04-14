@@ -1,5 +1,6 @@
 ﻿using Projekt.application;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Projekt.pages
@@ -31,11 +32,24 @@ namespace Projekt.pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Delete error",
+                MessageBox.Show(GetFullExceptionMessage(ex), "Delete error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             Close();
+        }
+
+        private string GetFullExceptionMessage(Exception ex)
+        {
+            var messages = new List<string>();
+
+            while (ex != null)
+            {
+                messages.Add(ex.Message);
+                ex = ex.InnerException;
+            }
+
+            return string.Join(Environment.NewLine, messages);
         }
     }
 }
