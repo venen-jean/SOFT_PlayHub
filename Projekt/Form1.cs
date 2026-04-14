@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt.pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -97,7 +98,7 @@ namespace Projekt
                     {
 
                         globalstore.user = (public_users)user;
-                        main normal = new main();
+                        var normal = new RoleForm();
                         normal.Show();
                         this.Hide();
                         
