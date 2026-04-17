@@ -10,7 +10,7 @@ namespace Projekt.pages
 {
     public partial class RoleForm : GenericListForm<hrbac_roles>
     {
-        private static readonly string connString =
+        public static readonly string connString =
             "data source=10.20.20.9;initial catalog=g4_6it23;persist security info=True;user id=g4_6it23;password=8911,LKm,Rr;trustservercertificate=True;MultipleActiveResultSets=True;";
 
         public RoleForm()
@@ -53,6 +53,8 @@ namespace Projekt.pages
             return new RoleEditForm(entity, BindingSource);
         }
 
+        // ===============================================
+
         private void RoleForm_Load(object sender, EventArgs e)
         {
             comboBox1.DataSource = GetTableNames();
@@ -65,8 +67,6 @@ namespace Projekt.pages
                     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'")
                 .ToList();
         }
-
-        // ===============================================
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -88,13 +88,33 @@ namespace Projekt.pages
 
         private DataGridView CreateDataGridView()
         {
-            return new DataGridView
+            var dgv = new DataGridView
             {
                 Dock = DockStyle.Top,
                 Height = 250,
                 Width = 800,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             };
+
+            dgv.CellDoubleClick += DynamicGrid_CellDoubleClick;
+
+            return dgv;
+        }
+
+        private void DynamicGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
+            var dgv = sender as DataGridView;
+
+            if (e.RowIndex < 0) return;
+
+            var rowView = dgv.Rows[e.RowIndex].DataBoundItem as DataRowView;
+            if (rowView == null) return;
+
+            string tableName = comboBox1.SelectedItem.ToString();
+
+            var editForm = new DynamicEditForm(tableName, rowView.Row);
+            editForm.FormClosed += (s, args) => RefreshGrid(tableName, dgv);
+
+            editForm.ShowDialog();
         }
 
         private FlowLayoutPanel CreateInputPanel()
