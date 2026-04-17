@@ -20,34 +20,6 @@ namespace Projekt.pages
             LoadData();
         }
 
-        private void CreateRoleBtn_Click(object sender, EventArgs e)
-        {
-            var name = nameTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                ShowError("Name is required");
-                return;
-            }
-
-            try
-            {
-                Service.Create(new hrbac_roles { name = name });
-                ShowSuccess("Role created");
-                nameTextBox.Clear();
-                RefreshData();
-            }
-            catch (CrudServiceException ex)
-            {
-                ShowError(CrudService<hrbac_roles>.GetFullExceptionMessage(ex));
-            }
-        }
-
-        private void Hrbac_rolesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            OnCellClick((DataGridView)sender, e);
-        }
-
         protected override Form CreateEditForm(hrbac_roles entity)
         {
             return new RoleEditForm(entity, BindingSource);
@@ -151,6 +123,7 @@ namespace Projekt.pages
             using (var conn = CreateConnection())
             {
                 var schema = conn.GetSchema("Columns", new[] { null, null, tableName, null });
+                var foreignKeys = DbUiHelper.GetForeignKeys(connString, tableName);
 
                 foreach (DataRow row in schema.Rows)
                 {
@@ -160,7 +133,17 @@ namespace Projekt.pages
                         continue;
 
                     panel.Controls.Add(CreateLabel(columnName));
-                    panel.Controls.Add(CreateTextBox(columnName));
+
+                    if (foreignKeys.ContainsKey(columnName))
+                    {
+                        panel.Controls.Add(
+                            DbUiHelper.CreateForeignKeyComboBox(connString, foreignKeys[columnName], columnName)
+                        );
+                    }
+                    else
+                    {
+                        panel.Controls.Add(CreateTextBox(columnName));
+                    }
                 }
 
                 var btn = CreateInsertButton(tableName, panel, dgv);
@@ -221,6 +204,7 @@ namespace Projekt.pages
         private void InsertRow(string tableName, FlowLayoutPanel panel, DataGridView dgv)
         {
             var textboxes = panel.Controls.OfType<TextBox>().ToList();
+            var comboboxes = panel.Controls.OfType<ComboBox>().ToList();
 
             var columns = new List<string>();
             var parameters = new List<string>();
@@ -233,12 +217,23 @@ namespace Projekt.pages
                 foreach (var tb in textboxes)
                 {
                     string col = tb.Name.Replace("txt_", "");
-                    string paramName = "@p" + i++;
+                    string param = "@p" + i++;
 
                     columns.Add($"[{col}]");
-                    parameters.Add(paramName);
+                    parameters.Add(param);
 
-                    cmd.Parameters.AddWithValue(paramName, tb.Text);
+                    cmd.Parameters.AddWithValue(param, tb.Text);
+                }
+
+                foreach (var cb in comboboxes)
+                {
+                    string col = cb.Name.Replace("cb_", "");
+                    string param = "@p" + i++;
+
+                    columns.Add($"[{col}]");
+                    parameters.Add(param);
+
+                    cmd.Parameters.AddWithValue(param, cb.SelectedValue);
                 }
 
                 cmd.CommandText =
@@ -247,7 +242,7 @@ namespace Projekt.pages
                 cmd.ExecuteNonQuery();
             }
 
-            RefreshGrid(tableName, dgv); // 👈 key line
+            RefreshGrid(tableName, dgv);
             MessageBox.Show("Inserted!");
         }
 

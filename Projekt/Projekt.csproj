@@ -65,6 +65,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="application\CrudService.cs" />
+    <Compile Include="application\DbUiHelper.cs" />
     <Compile Include="application\DynamicEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

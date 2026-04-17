@@ -14,7 +14,7 @@ namespace Projekt.application
     {
         private readonly string _tableName;
         private readonly DataRow _row;
-        private readonly Dictionary<string, TextBox> _inputs = new Dictionary<string, TextBox>();
+        private readonly Dictionary<string, Control> _inputs = new Dictionary<string, Control>();
 
         public DynamicEditForm(string tableName, DataRow row)
         {
@@ -32,6 +32,8 @@ namespace Projekt.application
                 AutoSize = true
             };
 
+            var foreignKeys = DbUiHelper.GetForeignKeys(RoleForm.connString, _tableName);
+
             foreach (DataColumn col in _row.Table.Columns)
             {
                 if (col.ColumnName.Equals("id", StringComparison.OrdinalIgnoreCase))
@@ -39,14 +41,29 @@ namespace Projekt.application
 
                 panel.Controls.Add(new Label { Text = col.ColumnName, Width = 100 });
 
-                var txt = new TextBox
+                if (foreignKeys.ContainsKey(col.ColumnName))
                 {
-                    Width = 150,
-                    Text = _row[col]?.ToString()
-                };
+                    var cb = DbUiHelper.CreateForeignKeyComboBox(
+                        RoleForm.connString,
+                        foreignKeys[col.ColumnName],
+                        col.ColumnName
+                    );
 
-                _inputs[col.ColumnName] = txt;
-                panel.Controls.Add(txt);
+                    cb.SelectedValue = _row[col.ColumnName];
+                    _inputs[col.ColumnName] = cb;
+                    panel.Controls.Add(cb);
+                }
+                else
+                {
+                    var txt = new TextBox
+                    {
+                        Width = 150,
+                        Text = _row[col]?.ToString()
+                    };
+
+                    _inputs[col.ColumnName] = txt;
+                    panel.Controls.Add(txt);
+                }
             }
 
             var updateBtn = new Button { Text = "Update" };
@@ -76,7 +93,11 @@ namespace Projekt.application
                         string param = "@" + kvp.Key;
 
                         setParts.Add($"[{kvp.Key}] = {param}");
-                        cmd.Parameters.AddWithValue(param, kvp.Value.Text);
+
+                        if (kvp.Value is TextBox tb)
+                            cmd.Parameters.AddWithValue(param, tb.Text);
+                        else if (kvp.Value is ComboBox cb)
+                            cmd.Parameters.AddWithValue(param, cb.SelectedValue);
                     }
 
                     cmd.Parameters.AddWithValue("@id", _row["id"]);
