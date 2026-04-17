@@ -5,13 +5,6 @@ using System.Windows.Forms;
 
 namespace Projekt.pages
 {
-    /// <summary>
-    /// Generic base class for all entity edit forms
-    /// Eliminates repetition across RoleEditForm, UserEditForm, GameEditForm, etc.
-    /// 
-    /// NOTE: This is NOT a partial class (no designer file).
-    /// Derived classes should be partial and have InitializeComponent in their designer.
-    /// </summary>
     public class GenericEditForm<T> : Form where T : class
     {
         protected CrudService<T> Service { get; set; }
@@ -26,7 +19,6 @@ namespace Projekt.pages
             BindingSource = bindingSource;
             Service = new CrudService<T>();
 
-            // Auto-bind the entity to the binding source
             BindingSource.DataSource = entity;
         }
 
@@ -84,13 +76,7 @@ namespace Projekt.pages
             }
         }
 
-        /// <summary>
-        /// Override this in derived classes to add custom validation
-        /// </summary>
-        protected virtual void ValidateForm()
-        {
-            // Base implementation: override in derived classes
-        }
+        protected virtual void ValidateForm() { }
 
         protected void ShowError(string message)
         {

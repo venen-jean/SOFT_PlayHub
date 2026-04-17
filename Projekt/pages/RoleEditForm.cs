@@ -1,6 +1,4 @@
-﻿using Projekt.application;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Projekt.pages
@@ -10,6 +8,8 @@ namespace Projekt.pages
         public RoleEditForm(hrbac_roles role, BindingSource bindingSource) : base(role, bindingSource)
         {
             InitializeComponent();
+
+            hrbac_rolesBindingSource.DataSource = bindingSource.DataSource;
         }
 
         private void UpdateRoleBtn_Click(object sender, EventArgs e) => OnSaveClick(sender, e);
