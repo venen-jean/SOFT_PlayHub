@@ -83,7 +83,7 @@ namespace Projekt.pages
             flowLayoutPanel1.Controls.Add(inputPanel);
 
             LoadTableData(tableName, dgv);
-            GenerateInputs(tableName, inputPanel);
+            GenerateInputs(tableName, inputPanel, dgv);
         }
 
         private DataGridView CreateDataGridView()
@@ -117,12 +117,16 @@ namespace Projekt.pages
                 {
                     var dt = new DataTable();
                     dt.Load(reader);
-                    dgv.DataSource = dt;
+
+                    var bs = new BindingSource();
+                    bs.DataSource = dt;
+
+                    dgv.DataSource = bs;
                 }
             }
         }
 
-        private void GenerateInputs(string tableName, FlowLayoutPanel panel)
+        private void GenerateInputs(string tableName, FlowLayoutPanel panel, DataGridView dgv)
         {
             using (var conn = CreateConnection())
             {
@@ -139,7 +143,8 @@ namespace Projekt.pages
                     panel.Controls.Add(CreateTextBox(columnName));
                 }
 
-                panel.Controls.Add(CreateInsertButton(tableName, panel));
+                var btn = CreateInsertButton(tableName, panel, dgv);
+                panel.Controls.Add(btn);
             }
         }
 
@@ -161,19 +166,39 @@ namespace Projekt.pages
             };
         }
 
-        private Button CreateInsertButton(string tableName, FlowLayoutPanel panel)
+        private Button CreateInsertButton(string tableName, FlowLayoutPanel panel, DataGridView dgv)
         {
             var btn = new Button
             {
                 Text = "Insert"
             };
 
-            btn.Click += (s, e) => InsertRow(tableName, panel);
+            btn.Click += (s, e) => InsertRow(tableName, panel, dgv);
 
             return btn;
         }
 
-        private void InsertRow(string tableName, FlowLayoutPanel panel)
+        private void RefreshGrid(string tableName, DataGridView dgv)
+        {
+            if (dgv.DataSource is BindingSource bs)
+            {
+                using (var conn = CreateConnection())
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT * FROM [{tableName}]";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var dt = new DataTable();
+                        dt.Load(reader);
+
+                        bs.DataSource = dt;
+                    }
+                }
+            }
+        }
+
+        private void InsertRow(string tableName, FlowLayoutPanel panel, DataGridView dgv)
         {
             var textboxes = panel.Controls.OfType<TextBox>().ToList();
 
@@ -202,6 +227,7 @@ namespace Projekt.pages
                 cmd.ExecuteNonQuery();
             }
 
+            RefreshGrid(tableName, dgv); // 👈 key line
             MessageBox.Show("Inserted!");
         }
 
