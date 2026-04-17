@@ -4,15 +4,14 @@ using System.Windows.Forms;
 
 namespace Projekt.pages
 {
-    public partial class RoleForm : Form
+    public partial class RoleForm : GenericListForm<hrbac_roles>
     {
-        private CrudService<hrbac_roles> service = new CrudService<hrbac_roles>();
-
         public RoleForm()
         {
             InitializeComponent();
+            BindingSource = hrbac_rolesBindingSource;
+            LoadData();
 
-            service.Load(hrbac_rolesBindingSource);
         }
 
         private void CreateRoleBtn_Click(object sender, EventArgs e)
@@ -21,29 +20,31 @@ namespace Projekt.pages
 
             if (string.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Name ist leer");
+                ShowError("Name is required");
                 return;
             }
-
-            var newRole = new hrbac_roles
+        
+            try
             {
-                name = name
-            };
-
-            service.Create(newRole);
-            service.Load(hrbac_rolesBindingSource);
+                Service.Create(new hrbac_roles { name = name });
+                ShowSuccess("Role created");
+                nameTextBox.Clear();
+                RefreshData();
+            }
+            catch (CrudServiceException ex)
+            {
+                ShowError(CrudService<hrbac_roles>.GetFullExceptionMessage(ex));
+            }
         }
 
         private void Hrbac_rolesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var role = (hrbac_roles)hrbac_rolesBindingSource.Current;
+            OnCellClick((DataGridView)sender, e);
+        }
 
-            using (var form = new RoleEditForm(role))
-            {
-                form.ShowDialog();
-            }
-
-            service.Load(hrbac_rolesBindingSource);
+        protected override Form CreateEditForm(hrbac_roles entity)
+        {
+            return new RoleEditForm(entity, BindingSource);
         }
     }
 }
