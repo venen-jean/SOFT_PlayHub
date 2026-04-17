@@ -1,7 +1,6 @@
 ﻿using Projekt.application;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,8 +10,8 @@ namespace Projekt.pages
 {
     public partial class RoleForm : GenericListForm<hrbac_roles>
     {
-
-        private static readonly string connString = "data source=10.20.20.9;initial catalog=g4_6it23;persist security info=True;user id=g4_6it23;password=8911,LKm,Rr;trustservercertificate=True;MultipleActiveResultSets=True;";
+        private static readonly string connString =
+            "data source=10.20.20.9;initial catalog=g4_6it23;persist security info=True;user id=g4_6it23;password=8911,LKm,Rr;trustservercertificate=True;MultipleActiveResultSets=True;";
 
         public RoleForm()
         {
@@ -25,12 +24,12 @@ namespace Projekt.pages
         {
             var name = nameTextBox.Text;
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 ShowError("Name is required");
                 return;
             }
-        
+
             try
             {
                 Service.Create(new hrbac_roles { name = name });
@@ -56,133 +55,163 @@ namespace Projekt.pages
 
         private void RoleForm_Load(object sender, EventArgs e)
         {
-            var tables = globalstore.Daten.Database
+            comboBox1.DataSource = GetTableNames();
+        }
+
+        private List<string> GetTableNames()
+        {
+            return globalstore.Daten.Database
                 .SqlQuery<string>(
                     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'")
                 .ToList();
-
-            comboBox1.DataSource = tables;
         }
 
         // ===============================================
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem == null) return;
+
             string tableName = comboBox1.SelectedItem.ToString();
 
-            flowLayoutPanel1.Controls.Clear(); // container panel on your form
+            flowLayoutPanel1.Controls.Clear();
 
-            // Create DataGridView
-            DataGridView dgv = new DataGridView
-            {
-                Dock = DockStyle.Top,
-                Height = 250,
-                Width = 800,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            };
+            var dgv = CreateDataGridView();
+            var inputPanel = CreateInputPanel();
 
             flowLayoutPanel1.Controls.Add(dgv);
-
-            // Create flow panel for inputs
-            FlowLayoutPanel inputPanel = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Top,
-                AutoSize = true
-            };
-
             flowLayoutPanel1.Controls.Add(inputPanel);
 
             LoadTableData(tableName, dgv);
             GenerateInputs(tableName, inputPanel);
         }
 
+        private DataGridView CreateDataGridView()
+        {
+            return new DataGridView
+            {
+                Dock = DockStyle.Top,
+                Height = 250,
+                Width = 800,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            };
+        }
+
+        private FlowLayoutPanel CreateInputPanel()
+        {
+            return new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true
+            };
+        }
+
         private void LoadTableData(string tableName, DataGridView dgv)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = CreateConnection())
+            using (var cmd = conn.CreateCommand())
             {
-                if (conn.State != System.Data.ConnectionState.Open)
-                    conn.Open();
+                cmd.CommandText = $"SELECT * FROM [{tableName}]";
 
-                using (var cmd = conn.CreateCommand())
+                using (var reader = cmd.ExecuteReader())
                 {
-                    cmd.CommandText = $"SELECT * FROM [{tableName}]";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        dgv.DataSource = dt;
-                    }
+                    var dt = new DataTable();
+                    dt.Load(reader);
+                    dgv.DataSource = dt;
                 }
             }
         }
 
         private void GenerateInputs(string tableName, FlowLayoutPanel panel)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = CreateConnection())
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
-
                 var schema = conn.GetSchema("Columns", new[] { null, null, tableName, null });
 
                 foreach (DataRow row in schema.Rows)
                 {
                     string columnName = row["COLUMN_NAME"].ToString();
 
-                    if (columnName == "id") continue;
+                    if (columnName.Equals("id", StringComparison.OrdinalIgnoreCase))
+                        continue;
 
-                    Label lbl = new Label
-                    {
-                        Text = columnName,
-                        Width = 100
-                    };
-
-                    TextBox txt = new TextBox
-                    {
-                        Name = "txt_" + columnName,
-                        Width = 150
-                    };
-
-                    panel.Controls.Add(lbl);
-                    panel.Controls.Add(txt);
+                    panel.Controls.Add(CreateLabel(columnName));
+                    panel.Controls.Add(CreateTextBox(columnName));
                 }
 
-                // Add button
-                Button btn = new Button
-                {
-                    Text = "Insert"
-                };
-
-                btn.Click += (s, e) => InsertRow(tableName, panel);
-
-                panel.Controls.Add(btn);
+                panel.Controls.Add(CreateInsertButton(tableName, panel));
             }
+        }
+
+        private Label CreateLabel(string text)
+        {
+            return new Label
+            {
+                Text = text,
+                Width = 100
+            };
+        }
+
+        private TextBox CreateTextBox(string columnName)
+        {
+            return new TextBox
+            {
+                Name = "txt_" + columnName,
+                Width = 150
+            };
+        }
+
+        private Button CreateInsertButton(string tableName, FlowLayoutPanel panel)
+        {
+            var btn = new Button
+            {
+                Text = "Insert"
+            };
+
+            btn.Click += (s, e) => InsertRow(tableName, panel);
+
+            return btn;
         }
 
         private void InsertRow(string tableName, FlowLayoutPanel panel)
         {
-            var textboxes = panel.Controls
-                .OfType<TextBox>()
-                .ToList();
+            var textboxes = panel.Controls.OfType<TextBox>().ToList();
 
             var columns = new List<string>();
-            var values = new List<string>();
+            var parameters = new List<string>();
 
-            foreach (var tb in panel.Controls.OfType<TextBox>())
+            using (var conn = CreateConnection())
+            using (var cmd = conn.CreateCommand())
             {
-                string col = tb.Name.Replace("txt_", "");
-                string val = tb.Text.Replace("'", "''"); // escape quotes
+                int i = 0;
 
-                columns.Add($"[{col}]");
-                values.Add($"'{val}'");
+                foreach (var tb in textboxes)
+                {
+                    string col = tb.Name.Replace("txt_", "");
+                    string paramName = "@p" + i++;
+
+                    columns.Add($"[{col}]");
+                    parameters.Add(paramName);
+
+                    cmd.Parameters.AddWithValue(paramName, tb.Text);
+                }
+
+                cmd.CommandText =
+                    $"INSERT INTO [{tableName}] ({string.Join(",", columns)}) VALUES ({string.Join(",", parameters)})";
+
+                cmd.ExecuteNonQuery();
             }
 
-            string sql = $"INSERT INTO [{tableName}] ({string.Join(",", columns)}) VALUES ({string.Join(",", values)})";
-
-            globalstore.Daten.Database.ExecuteSqlCommand(sql);
-
             MessageBox.Show("Inserted!");
+        }
+
+        private SqlConnection CreateConnection()
+        {
+            var conn = new SqlConnection(connString);
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+
+            return conn;
         }
     }
 }
