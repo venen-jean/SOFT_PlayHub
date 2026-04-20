@@ -18,7 +18,7 @@ namespace Projekt.pages
             InitializeComponent();
             BindingSource = hrbac_rolesBindingSource;
             LoadData();
-            button1.Text = "Logout";
+            logout.Text = "Logout";
             yeah();
         }
 
@@ -267,7 +267,6 @@ namespace Projekt.pages
 
         private void yeah()
         {
-            Console.WriteLine("penois");
             int userId = globalstore.user.id;
             var spiele = globalstore.Daten.public_users_games
                 .Where(ug => ug.user_id == userId)

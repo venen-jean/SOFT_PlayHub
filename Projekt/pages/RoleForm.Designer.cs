@@ -36,13 +36,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.public_gamesDataGridView = new System.Windows.Forms.DataGridView();
-            this.public_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.public_users_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.hrbac_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hrbac_users_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.public_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.public_users_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.logout = new System.Windows.Forms.Button();
+            this.hrbac_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hrbac_users_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -126,32 +126,6 @@
             this.public_gamesDataGridView.Size = new System.Drawing.Size(240, 517);
             this.public_gamesDataGridView.TabIndex = 1;
             // 
-            // public_gamesBindingSource
-            // 
-            this.public_gamesBindingSource.DataSource = typeof(Projekt.public_games);
-            // 
-            // public_users_gamesBindingSource
-            // 
-            this.public_users_gamesBindingSource.DataSource = typeof(Projekt.public_users_games);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(904, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(142, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // hrbac_rolesBindingSource
-            // 
-            this.hrbac_rolesBindingSource.DataSource = typeof(Projekt.hrbac_roles);
-            // 
-            // hrbac_users_rolesBindingSource
-            // 
-            this.hrbac_users_rolesBindingSource.DataSource = typeof(Projekt.hrbac_users_roles);
-            // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "name";
@@ -164,12 +138,38 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "Preis";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
+            // public_gamesBindingSource
+            // 
+            this.public_gamesBindingSource.DataSource = typeof(Projekt.public_games);
+            // 
+            // public_users_gamesBindingSource
+            // 
+            this.public_users_gamesBindingSource.DataSource = typeof(Projekt.public_users_games);
+            // 
+            // logout
+            // 
+            this.logout.Location = new System.Drawing.Point(904, 11);
+            this.logout.Name = "logout";
+            this.logout.Size = new System.Drawing.Size(142, 23);
+            this.logout.TabIndex = 1;
+            this.logout.Text = "Logout";
+            this.logout.UseVisualStyleBackColor = true;
+            this.logout.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // hrbac_rolesBindingSource
+            // 
+            this.hrbac_rolesBindingSource.DataSource = typeof(Projekt.hrbac_roles);
+            // 
+            // hrbac_users_rolesBindingSource
+            // 
+            this.hrbac_users_rolesBindingSource.DataSource = typeof(Projekt.hrbac_users_roles);
+            // 
             // RoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 699);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.logout);
             this.Controls.Add(this.tabControl1);
             this.Name = "RoleForm";
             this.Text = "s";
@@ -195,7 +195,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button logout;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.BindingSource public_users_gamesBindingSource;
         private System.Windows.Forms.DataGridView public_gamesDataGridView;
