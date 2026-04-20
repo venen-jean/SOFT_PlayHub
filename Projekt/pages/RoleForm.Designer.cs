@@ -34,10 +34,28 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.getPubBtn = new System.Windows.Forms.Button();
+            this.game_platformsDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.game_platformsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.public_usersDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.public_usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hrbac_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hrbac_users_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.game_platformsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_usersDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -82,13 +100,107 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.getPubBtn);
+            this.tabPage2.Controls.Add(this.game_platformsDataGridView);
+            this.tabPage2.Controls.Add(this.public_usersDataGridView);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1194, 661);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "UserData";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // getPubBtn
+            // 
+            this.getPubBtn.Location = new System.Drawing.Point(526, 253);
+            this.getPubBtn.Name = "getPubBtn";
+            this.getPubBtn.Size = new System.Drawing.Size(93, 23);
+            this.getPubBtn.TabIndex = 2;
+            this.getPubBtn.Text = "Get Publishers";
+            this.getPubBtn.UseVisualStyleBackColor = true;
+            this.getPubBtn.Click += new System.EventHandler(this.GetPubBtn_Click);
+            // 
+            // game_platformsDataGridView
+            // 
+            this.game_platformsDataGridView.AutoGenerateColumns = false;
+            this.game_platformsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.game_platformsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.game_platformsDataGridView.DataSource = this.game_platformsBindingSource;
+            this.game_platformsDataGridView.Location = new System.Drawing.Point(648, 6);
+            this.game_platformsDataGridView.Name = "game_platformsDataGridView";
+            this.game_platformsDataGridView.Size = new System.Drawing.Size(424, 220);
+            this.game_platformsDataGridView.TabIndex = 1;
+            this.game_platformsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Game_platformsDataGridView_CellClick);
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn6.HeaderText = "id";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "name";
+            this.dataGridViewTextBoxColumn7.HeaderText = "name";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // game_platformsBindingSource
+            // 
+            this.game_platformsBindingSource.DataSource = typeof(Projekt.game_platforms);
+            // 
+            // public_usersDataGridView
+            // 
+            this.public_usersDataGridView.AutoGenerateColumns = false;
+            this.public_usersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.public_usersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.public_usersDataGridView.DataSource = this.public_usersBindingSource;
+            this.public_usersDataGridView.Location = new System.Drawing.Point(17, 6);
+            this.public_usersDataGridView.Name = "public_usersDataGridView";
+            this.public_usersDataGridView.Size = new System.Drawing.Size(602, 220);
+            this.public_usersDataGridView.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "username";
+            this.dataGridViewTextBoxColumn2.HeaderText = "username";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "email";
+            this.dataGridViewTextBoxColumn3.HeaderText = "email";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "password";
+            this.dataGridViewTextBoxColumn4.HeaderText = "password";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "balance";
+            this.dataGridViewTextBoxColumn5.HeaderText = "balance";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // public_usersBindingSource
+            // 
+            this.public_usersBindingSource.DataSource = typeof(Projekt.public_users);
             // 
             // hrbac_rolesBindingSource
             // 
@@ -98,17 +210,32 @@
             // 
             this.hrbac_users_rolesBindingSource.DataSource = typeof(Projekt.hrbac_users_roles);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(445, 253);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Get Devs";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.GetDevBtn_Click);
+            // 
             // RoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 698);
+            this.ClientSize = new System.Drawing.Size(1214, 699);
             this.Controls.Add(this.tabControl1);
             this.Name = "RoleForm";
             this.Text = "s";
             this.Load += new System.EventHandler(this.RoleForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.game_platformsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_usersDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_usersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -124,5 +251,18 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView public_usersDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.BindingSource public_usersBindingSource;
+        private System.Windows.Forms.DataGridView game_platformsDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.BindingSource game_platformsBindingSource;
+        private System.Windows.Forms.Button getPubBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
