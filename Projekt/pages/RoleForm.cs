@@ -283,9 +283,8 @@ namespace Projekt.pages
                       })
                 .ToList();
 
- 
-            public_users_gamesBindingSource.DataSource = spiele;
-            public_users_gamesDataGridView.DataSource = spiele;
+            public_gamesBindingSource.DataSource = spiele;
+            public_gamesDataGridView.DataSource = spiele;
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
