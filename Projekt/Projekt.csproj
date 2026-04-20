@@ -46,6 +46,7 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -64,6 +65,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="application\CrudService.cs" />
+    <Compile Include="application\DbUiHelper.cs" />
+    <Compile Include="application\DynamicEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="application\GenericEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
