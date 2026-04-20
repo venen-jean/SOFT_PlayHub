@@ -1,15 +1,7 @@
 ﻿using Projekt.pages;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Projekt
 {
@@ -19,6 +11,8 @@ namespace Projekt
         public Form1()
         {
             InitializeComponent();
+            mode = true;
+
             anzeige(1);
             button1.Text = "Login";
             button2.Text = "Register";
@@ -77,96 +71,94 @@ namespace Projekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var users = globalstore.Daten.public_users.FirstOrDefault(u => u.username == textBox1.Text);
-
-
-            string tes = textBox1.Text;
-            anzeige(1);
-            if (mode||!string.IsNullOrEmpty(textBox1.Text) || !string.IsNullOrEmpty(textBox2.Text))
+            if (!mode)
             {
-                if (textBox1.Text.Contains("@")&& textBox1.Text.Contains("."))
-                {
-                    string passwordHash = Passwordhasher.HashPassword(textBox2.Text);
+                anzeige(1);
+                mode = true;
+                anzeigeclear();
+                return;
+            }
 
-                    var userdata = globalstore.Daten.public_users
-                .FirstOrDefault(u => u.email.ToLower() == textBox1.Text.ToLower()
-                                  && u.password == passwordHash);
+            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                MessageBox.Show("Bitte Email/Username und Passwort eingeben!");
+                return;
+            }
 
-                    var user = globalstore.Daten.public_users.FirstOrDefault(a => a.email.ToLower().Equals(textBox1.Text.ToLower()));
+            string passwordHash = Passwordhasher.HashPassword(textBox2.Text);
 
-                    if (userdata!=null)
-                    {
+            var userdata = globalstore.Daten.public_users.FirstOrDefault(a =>
+                (a.email.ToLower() == textBox1.Text.ToLower() ||
+                 a.username.ToLower() == textBox1.Text.ToLower()) &&
+                a.password == passwordHash
+            );
 
-                        globalstore.user = (public_users)user;
-                        var normal = new RoleForm();
-                        normal.Show();
-                        this.Hide();
-                        
-                        //MessageBox.Show("Login ja!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Login neiun");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Gültige Email!");
-                }
+            if (userdata != null)
+            {
+                globalstore.user = userdata;
+                var normal = new RoleForm();
+                normal.Show();
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("Bitte füll alle Felder aus!");
+                MessageBox.Show("Falsche Login-Daten!");
             }
-                mode = true;
-            anzeigeclear();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            anzeige(2);
-            if (!mode
-                &&!string.IsNullOrEmpty(textBox1.Text)
-                ||!string.IsNullOrEmpty(textBox2.Text)
-                ||!string.IsNullOrEmpty(textBox3.Text)
-                ||!string.IsNullOrEmpty(textBox4.Text)
-                    )
+            if (mode)
             {
-                if (textBox2.Text.Contains("@"))
-                {
-
-                    if (textBox3.Text.Equals(textBox4.Text))
-                    {
-                        var newone = new public_users();
-                        newone.username = textBox1.Text;
-                        newone.email = textBox2.Text;
-                        newone.password = Passwordhasher.HashPassword(textBox3.Text);
-                        newone.balance = 100;
-                        MessageBox.Show("Register!");
-                        globalstore.Daten.public_users.Add(newone);
-                        globalstore.Daten.SaveChanges();
-
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Gültige Email!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Bitte füll alle Felder aus!");
+                anzeige(2);
+                mode = false;
+                anzeigeclear();
+                return;
             }
 
-            mode = false;
-            anzeigeclear();
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                string.IsNullOrWhiteSpace(textBox2.Text) ||
+                string.IsNullOrWhiteSpace(textBox3.Text) ||
+                string.IsNullOrWhiteSpace(textBox4.Text))
+            {
+                MessageBox.Show("Bitte alle Felder ausfüllen!");
+                return;
+            }
+
+            if (!textBox2.Text.Contains("@"))
+            {
+                MessageBox.Show("Bitte gültige Email eingeben!");
+                return;
+            }
+
+            if (textBox3.Text != textBox4.Text)
+            {
+                MessageBox.Show("Passwörter stimmen nicht überein!");
+                return;
+            }
+
+            var newone = new public_users
+            {
+                username = textBox1.Text,
+                email = textBox2.Text,
+                password = Passwordhasher.HashPassword(textBox3.Text),
+                balance = 100
+            };
+
+            globalstore.Daten.public_users.Add(newone);
+            globalstore.Daten.SaveChanges();
+
+            MessageBox.Show("Registrierung erfolgreich!");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

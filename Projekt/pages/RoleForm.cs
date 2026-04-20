@@ -18,6 +18,8 @@ namespace Projekt.pages
             InitializeComponent();
             BindingSource = hrbac_rolesBindingSource;
             LoadData();
+            button1.Text = "Logout";
+            yeah();
         }
 
         protected override Form CreateEditForm(hrbac_roles entity)
@@ -253,6 +255,41 @@ namespace Projekt.pages
                 conn.Open();
 
             return conn;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            globalstore.user = null;
+            this.Hide();
+            Form1 anmelden = new Form1();
+            anmelden.Show();
+        }
+
+        private void yeah()
+        {
+            Console.WriteLine("penois");
+            int userId = globalstore.user.id;
+            var spiele = globalstore.Daten.public_users_games
+                .Where(ug => ug.user_id == userId)
+                .Join(globalstore.Daten.public_games,
+                      ug => ug.game_id,
+                      g => g.id,
+                      (ug, g) => new
+                      {
+                          g.id,
+                          g.name,
+                          g.price,
+                          ug.buy_datetime
+                      })
+                .ToList();
+
+ 
+            public_users_gamesBindingSource.DataSource = spiele;
+            public_users_gamesDataGridView.DataSource = spiele;
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
         }
     }
 }
