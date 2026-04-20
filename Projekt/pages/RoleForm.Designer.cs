@@ -56,6 +56,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.public_usersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.public_usersBindingSource)).BeginInit();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.public_gamesDataGridView = new System.Windows.Forms.DataGridView();
+            this.public_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.public_users_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.hrbac_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hrbac_users_rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_users_gamesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +95,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -201,6 +217,47 @@
             // public_usersBindingSource
             // 
             this.public_usersBindingSource.DataSource = typeof(Projekt.public_users);
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.public_gamesDataGridView);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1194, 661);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Spiele (Besitz)";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // public_gamesDataGridView
+            // 
+            this.public_gamesDataGridView.AutoGenerateColumns = false;
+            this.public_gamesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.public_gamesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn7});
+            this.public_gamesDataGridView.DataSource = this.public_gamesBindingSource;
+            this.public_gamesDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.public_gamesDataGridView.Name = "public_gamesDataGridView";
+            this.public_gamesDataGridView.Size = new System.Drawing.Size(240, 517);
+            this.public_gamesDataGridView.TabIndex = 1;
+            // 
+            // public_gamesBindingSource
+            // 
+            this.public_gamesBindingSource.DataSource = typeof(Projekt.public_games);
+            // 
+            // public_users_gamesBindingSource
+            // 
+            this.public_users_gamesBindingSource.DataSource = typeof(Projekt.public_users_games);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(904, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(142, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // hrbac_rolesBindingSource
             // 
@@ -219,12 +276,24 @@
             this.button1.Text = "Get Devs";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.GetDevBtn_Click);
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "price";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Preis";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // RoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 699);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Name = "RoleForm";
             this.Text = "s";
@@ -236,6 +305,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.public_usersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.public_usersBindingSource)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_users_gamesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_rolesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hrbac_users_rolesBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -264,5 +337,12 @@
         private System.Windows.Forms.BindingSource game_platformsBindingSource;
         private System.Windows.Forms.Button getPubBtn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.BindingSource public_users_gamesBindingSource;
+        private System.Windows.Forms.DataGridView public_gamesDataGridView;
+        private System.Windows.Forms.BindingSource public_gamesBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }
