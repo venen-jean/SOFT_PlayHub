@@ -14,7 +14,7 @@ namespace Projekt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RoleForm());
+            Application.Run(new Form1());
         }
     }
 }
