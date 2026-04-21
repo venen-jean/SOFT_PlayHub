@@ -20,7 +20,53 @@ namespace Projekt.pages
             LoadData();
             logout.Text = "Logout";
             yeah();
+
+            public_usersBindingSource.DataSource = globalstore.Daten.public_users.ToList();
+            game_platformsBindingSource.DataSource = globalstore.Daten.game_platforms.ToList();
         }
+
+        // Statistic
+
+        private void Game_platformsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedPlatform = game_platformsBindingSource.Current as game_platforms;
+            if (selectedPlatform == null)
+                return;
+
+            var users = globalstore.Daten.public_users
+                .Where(u => u.public_users_games
+                    .Any(ug => ug.public_games.game_games_platforms
+                        .Any(gp => gp.platform_id == selectedPlatform.id)
+                    )
+                )
+                .ToList();
+
+            public_usersBindingSource.DataSource = users;
+        }
+
+        private void GetPubBtn_Click(object sender, EventArgs e)
+        {
+            var publishers = globalstore.Daten.public_users
+                .Where(u => u.public_publishers_games
+                    .Any(pg => pg.user_id == u.id)
+                )
+                .ToList();
+
+            public_usersBindingSource.DataSource = publishers;
+        }
+
+        private void GetDevBtn_Click(object sender, EventArgs e)
+        {
+            var publishers = globalstore.Daten.public_users
+                .Where(u => u.public_developers_games
+                    .Any(pg => pg.user_id == u.id)
+                )
+                .ToList();
+
+            public_usersBindingSource.DataSource = publishers;
+        }
+
+        // End Statistic
 
         protected override Form CreateEditForm(hrbac_roles entity)
         {
