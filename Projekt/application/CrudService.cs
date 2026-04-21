@@ -8,9 +8,6 @@ using System.Windows.Forms;
 
 namespace Projekt.application
 {
-    /// <summary>
-    /// Enhanced generic CRUD service with error handling, validation, and tracking
-    /// </summary>
     public class CrudService<T> where T : class
     {
         private readonly DbContext _context;
@@ -20,9 +17,6 @@ namespace Projekt.application
             _context = globalstore.Daten;
         }
 
-        /// <summary>
-        /// Load all entities into a binding source for data binding
-        /// </summary>
         public BindingSource Load(BindingSource source)
         {
             try
@@ -37,9 +31,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Create a new entity with validation
-        /// </summary>
         public T Create(T entity)
         {
             if (entity == null)
@@ -61,9 +52,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Update an existing entity (tracked by EF)
-        /// </summary>
         public T Update(T entity)
         {
             if (entity == null)
@@ -85,9 +73,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Delete an entity
-        /// </summary>
         public void Delete(T entity)
         {
             if (entity == null)
@@ -100,7 +85,6 @@ namespace Projekt.application
             }
             catch (DbUpdateException ex)
             {
-                // Often caused by foreign key constraints
                 throw new CrudServiceException(
                     $"Cannot delete {typeof(T).Name}: it may be referenced by other data", ex);
             }
@@ -110,9 +94,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Save changes to the context (for bulk operations)
-        /// </summary>
         public void Save()
         {
             try
@@ -129,9 +110,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Get entity by primary key (assumes 'id' property)
-        /// </summary>
         public T GetById(object id)
         {
             try
@@ -144,9 +122,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Get all entities with optional filtering
-        /// </summary>
         public List<T> GetAll()
         {
             try
@@ -159,9 +134,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Check if an entity exists (useful before deleting)
-        /// </summary>
         public bool Exists(T entity)
         {
             try
@@ -174,9 +146,6 @@ namespace Projekt.application
             }
         }
 
-        /// <summary>
-        /// Format exception messages for display
-        /// </summary>
         public static string GetFullExceptionMessage(Exception ex)
         {
             var messages = new List<string>();
@@ -189,9 +158,6 @@ namespace Projekt.application
         }
     }
 
-    /// <summary>
-    /// Custom exception for CRUD operations
-    /// </summary>
     public class CrudServiceException : Exception
     {
         public CrudServiceException(string message) : base(message) { }

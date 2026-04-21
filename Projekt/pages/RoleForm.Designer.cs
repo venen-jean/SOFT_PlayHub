@@ -191,9 +191,9 @@
             // 
             this.game_platformsDataGridView.AutoGenerateColumns = false;
             this.game_platformsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.game_platformsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            //this.game_platformsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            //this.dataGridViewTextBoxColumn6,
+            //this.dataGridViewTextBoxColumn7});
             this.game_platformsDataGridView.DataSource = this.game_platformsBindingSource;
             this.game_platformsDataGridView.Location = new System.Drawing.Point(648, 6);
             this.game_platformsDataGridView.Name = "game_platformsDataGridView";
@@ -221,12 +221,12 @@
             // 
             this.public_usersDataGridView.AutoGenerateColumns = false;
             this.public_usersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.public_usersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
+            //this.public_usersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            //this.dataGridViewTextBoxColumn1,
+            //this.dataGridViewTextBoxColumn2,
+            //this.dataGridViewTextBoxColumn3,
+            //this.dataGridViewTextBoxColumn4,
+            //this.dataGridViewTextBoxColumn5});
             this.public_usersDataGridView.DataSource = this.public_usersBindingSource;
             this.public_usersDataGridView.Location = new System.Drawing.Point(17, 6);
             this.public_usersDataGridView.Name = "public_usersDataGridView";
@@ -330,14 +330,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridView public_usersDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.BindingSource public_usersBindingSource;
         private System.Windows.Forms.DataGridView game_platformsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.BindingSource game_platformsBindingSource;
         private System.Windows.Forms.Button getPubBtn;
         private System.Windows.Forms.Button button5;
