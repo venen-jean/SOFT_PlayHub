@@ -18,6 +18,8 @@ namespace Projekt.pages
             InitializeComponent();
             BindingSource = hrbac_rolesBindingSource;
             LoadData();
+            logout.Text = "Logout";
+            yeah();
 
             public_usersBindingSource.DataSource = globalstore.Daten.public_users.ToList();
             game_platformsBindingSource.DataSource = globalstore.Daten.game_platforms.ToList();
@@ -299,6 +301,39 @@ namespace Projekt.pages
                 conn.Open();
 
             return conn;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            globalstore.user = null;
+            this.Hide();
+            Form1 anmelden = new Form1();
+            anmelden.Show();
+        }
+
+        private void yeah()
+        {
+            int userId = globalstore.user.id;
+            var spiele = globalstore.Daten.public_users_games
+                .Where(ug => ug.user_id == userId)
+                .Join(globalstore.Daten.public_games,
+                      ug => ug.game_id,
+                      g => g.id,
+                      (ug, g) => new
+                      {
+                          g.id,
+                          g.name,
+                          g.price,
+                          ug.buy_datetime
+                      })
+                .ToList();
+
+            public_gamesBindingSource.DataSource = spiele;
+            public_gamesDataGridView.DataSource = spiele;
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -34,6 +34,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.public_gamesDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.public_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.public_users_gamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.logout = new System.Windows.Forms.Button();
             this.getPubBtn = new System.Windows.Forms.Button();
             this.game_platformsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +58,10 @@
             this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_users_gamesBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).BeginInit();
@@ -80,6 +91,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -112,6 +124,59 @@
             this.tabPage2.Text = "UserData";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.public_gamesDataGridView);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1194, 661);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Spiele (Besitz)";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // public_gamesDataGridView
+            // 
+            this.public_gamesDataGridView.AutoGenerateColumns = false;
+            this.public_gamesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.public_gamesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn7});
+            this.public_gamesDataGridView.DataSource = this.public_gamesBindingSource;
+            this.public_gamesDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.public_gamesDataGridView.Name = "public_gamesDataGridView";
+            this.public_gamesDataGridView.Size = new System.Drawing.Size(240, 517);
+            this.public_gamesDataGridView.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "price";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Preis";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // public_gamesBindingSource
+            // 
+            this.public_gamesBindingSource.DataSource = typeof(Projekt.public_games);
+            // 
+            // public_users_gamesBindingSource
+            // 
+            this.public_users_gamesBindingSource.DataSource = typeof(Projekt.public_users_games);
+            // 
+            // logout
+            // 
+            this.logout.Location = new System.Drawing.Point(904, 11);
+            this.logout.Name = "logout";
+            this.logout.Size = new System.Drawing.Size(142, 23);
+            this.logout.TabIndex = 1;
+            this.logout.Text = "Logout";
+            this.logout.UseVisualStyleBackColor = true;
+            this.logout.Click += new System.EventHandler(this.button1_Click);
             // getPubBtn
             // 
             this.getPubBtn.Location = new System.Drawing.Point(526, 253);
@@ -225,12 +290,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 699);
+            this.Controls.Add(this.logout);
             this.Controls.Add(this.tabControl1);
             this.Name = "RoleForm";
             this.Text = "s";
             this.Load += new System.EventHandler(this.RoleForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_gamesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.public_users_gamesBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.game_platformsBindingSource)).EndInit();
@@ -251,6 +321,13 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button logout;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.BindingSource public_users_gamesBindingSource;
+        private System.Windows.Forms.DataGridView public_gamesDataGridView;
+        private System.Windows.Forms.BindingSource public_gamesBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridView public_usersDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
